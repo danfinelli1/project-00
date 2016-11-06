@@ -1,0 +1,17 @@
+#start{
+  width: 75px;
+  height: 45px;
+  position: relative;;
+  bottom: 60px;
+  left: 680px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+#board{
+ width: 800px;
+ height: 600px;
+}
+.cars{
+  width: 40px;
+  height: 25px;
+}
