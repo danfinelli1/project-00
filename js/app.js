@@ -2,6 +2,19 @@ $(document).ready(function() {
     var $start = $("#start");
     var $myCanvas = $("#myCanvas");
 
+    var player1 = {
+      name: "",
+      gamesWon: 0,
+      gamesLost: 0,
+      gamesTied: 0
+    };
+    var player2 ={
+      name: "",
+      gamesWon: 0,
+      gamesLost: 0,
+      gamesTied: 0
+    };
+
     function startGame() {
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
@@ -64,8 +77,6 @@ $(document).ready(function() {
         ctx.strokeStyle = 'black';
         ctx.stroke();
 
-
-        // draw tracking rect at xy
         function drawCar1(x1, y1) {
             ctx.fillStyle = "white";
             ctx.strokeStyle = "gray";
@@ -88,13 +99,11 @@ $(document).ready(function() {
 
         $myCanvas.css("background-size", "0 0");
 
-        var $car1 = $("#car1");
-        var position1 = $car1.position();
         var x1 = 20;
         var y1 = 40;
         var x2 = 40;
         var y2 = 40;
-        var speedCarOne = 6;
+        var speedCarOne = 5;
         var speedCarTwo = 5;
 
         drawCar1(x1, y1);
@@ -102,46 +111,69 @@ $(document).ready(function() {
 
         $(document).keydown(function(event) {
 
-
             switch (event.keyCode) {
                 case 38:
-                    event.preventDefault();
-                    console.log("Up key is pressed");
-                    console.log(x1, y1);
+                event.preventDefault();
                     y1 -= speedCarOne;
                     drawCar1(x1, y1);
                     break;
                 case 40:
                     event.preventDefault();
-                    console.log("Down key is pressed");
-                    drawCar1(x1, y1);
                     y1 += speedCarOne;
-                    console.log(x1, y1);
+                    drawCar1(x1, y1);
                     break;
                 case 37:
-                    event.preventDefault();
-                    console.log("Left key is pressed");
-                    drawCar1(x1, y1);
+                event.preventDefault();
                     x1 -= speedCarOne;
-                    console.log(x1, y1);
+                    drawCar1(x1, y1);
                     break;
                 case 39:
-                    event.preventDefault();
-                    console.log("Right key is pressed");
-                    drawCar1(x1, y1);
+                event.preventDefault();
                     x1 += speedCarOne;
-                    console.log(x1, y1);
+                    drawCar1(x1, y1);
+                    break;
+                case 87:
+                    y2 -= speedCarTwo;
+                    drawCar2(x2, y2);
+                    break;
+                case 83:
+                    y2 += speedCarTwo;
+                    drawCar2(x2, y2);
+                    break;
+                case 65:
+                    x2 -= speedCarTwo;
+                    drawCar2(x2, y2);
+                    break;
+                case 68:
+                    x2 += speedCarTwo;
+                    drawCar2(x2, y2);
                     break;
             }
-            if ((x1>15&&x1<50&&y1<400)||(x1>215&&x1<255||y1>370&&y1<415)||(x1>515&&x1<565||y1<55&&y1>20)) {
-              speedCarOne=5;
-            } else {
-              speedCarOne=1;
-            }
+
+        if ((x1 > 15 && x1 < 50 && y1 < 400) || (x1 > 215 && x1 < 255 || y1 > 370 && y1 < 415) || (x1 > 515 && x1 < 565 || y1 < 55 && y1 > 20)) {
+            speedCarOne = 5;
+        } else {
+            speedCarOne = 1;
+        }
+        if ((x2 > 15 && x2 < 50 && y2 < 400) || (x2 > 215 && x2 < 255 || y2 > 370 && y2 < 415) || (x2 > 515 && x2 < 565 || y2 < 55 && y2 > 20)) {
+            speedCarTwo = 5;
+        } else {
+            speedCarTwo = 1;
+        } if ((x1 > 525&& x1 < 565)&& y1 >  380) {
+          alert(player1.name+"!! You Won!!");
+          player1.gamesWon++;
+          player2.gamesLost++;
+        } if ((x2 > 525&& x2 < 565)&& y2 >  380) {
+          alert(player2.name+"!! You Won!!");
+          player2.gamesWon++;
+          player1.gamesLost++;
+        }
 
 
-        });
+      });
         console.log("Game Started!");
+        player1.name = window.prompt("Player 1! Please enter your name!");
+        player2.name = window.prompt("Player 2! Please enter your name!");
         $start.hide();
     }
     $start.click(startGame);
