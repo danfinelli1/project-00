@@ -19,6 +19,13 @@ $(document).ready(function() {
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
+        //scoreboard
+        localStorage.setItem(player1, player2);
+        ctx.font = "21px serif";
+        ctx.fillText("Player 1: "+player1.gamesWon, 400, 300);
+        ctx.fillText("Player 2: "+player2.gamesWon, 400, 400);
+
+
         // draw path
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.lineWidth = 50;
@@ -167,14 +174,18 @@ $(document).ready(function() {
           alert(player2.name+"!! You Won!!");
           player2.gamesWon++;
           player1.gamesLost++;
+        } if(((x1 > 525&& x1 < 565)&& y1 >  380)&&((x2 > 525&& x2 < 565)&& y2 >  380)){
+          alert("It's a Tie!!");
+          player1.gamesTied++;
+          player2.gamesTied++;
         }
 
 
       });
         console.log("Game Started!");
+        $start.hide();
         player1.name = window.prompt("Player 1! Please enter your name!");
         player2.name = window.prompt("Player 2! Please enter your name!");
-        $start.hide();
     }
     $start.click(startGame);
 });
