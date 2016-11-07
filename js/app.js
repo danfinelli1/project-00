@@ -19,11 +19,6 @@ $(document).ready(function() {
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
-        //scoreboard
-        localStorage.setItem(player1, player2);
-        ctx.font = "21px serif";
-        ctx.fillText("Player 1: "+player1.gamesWon, 400, 300);
-        ctx.fillText("Player 2: "+player2.gamesWon, 400, 400);
 
 
         // draw path
